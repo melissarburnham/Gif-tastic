@@ -1,4 +1,4 @@
-# Giftastic
+# Gif-tastic
 
 ## Description
 
