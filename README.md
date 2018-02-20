@@ -1,5 +1,7 @@
 # Gif-tastic
 
+Click [here](https://melissarburnham.github.io/Gif-tastic/) for a live version of this webpage!
+
 ## Description
 
 * Use of jQuery, Javascript, Giphy API, HTML, and CSS
