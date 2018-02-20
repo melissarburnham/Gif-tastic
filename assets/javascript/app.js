@@ -17,9 +17,12 @@ function displayGifs(){
         method: "GET"
       }).then(function(response) {
             console.log(response);
+            // var gif = response.data[i].images.fixed_height.url;
+            // var picture = response.data[i].images.fixed_height_still.url;
+
             for (var i = 0; i < response.data.length; i++) { 
                 var gifImg = $("<img>");
-                gifImg.attr("src", response.data[i].images.fixed_height.url); 
+                gifImg.attr("src", response.data[i].images.fixed_height_still.url); 
                 gifImg.addClass("gifImg");
                $("#gifs").append(gifImg); 
 
@@ -28,8 +31,16 @@ function displayGifs(){
                gifRating.addClass("gifRating");
                $(".gifImg").append(gifRating);
             }
+            function clickPicture(){
+                $(".gifImg").on("click", function(){
+                    $(".gifImg").push(response.data[i].images.fixed_height.url);   
+                });
+            }
+            clickPicture();
       });
 }
+
+
 
 function renderButtons(){
 
