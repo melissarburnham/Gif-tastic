@@ -10,13 +10,23 @@ function displayGifs(){
     var topic = $(this).attr("data-name");
     var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=o4AWaJdZms9c7YCrvCHRCURV3GC5eSCj&q=" + topic + "&limit=10&offset=0&rating=G&lang=en"
 
+    $("#gifs").empty(); 
+
     $.ajax({
         url: queryURL,
         method: "GET"
       }).then(function(response) {
             console.log(response);
-            for (var i = 0; i < response.data.length; i++) {
-                $("#gifs").html(response.data[i].images.fixed_height.url);
+            for (var i = 0; i < response.data.length; i++) { 
+                var gifImg = $("<img>");
+                gifImg.attr("src", response.data[i].images.fixed_height.url); 
+                gifImg.addClass("gifImg");
+               $("#gifs").append(gifImg); 
+
+               var gifRating = $("<div>");
+               gifRating.text("Rating: " + response.data[i].rating.toUpperCase());
+               gifRating.addClass("gifRating");
+               $(".gifImg").append(gifRating);
             }
       });
 }
