@@ -44,27 +44,27 @@ function renderButtons(){
     }
 }
 
-$("#find-feelings").on("click", function(event){
-    event.preventDefault();
-    //grabs input from textbox
-    var topic = $("#feelings-input").val().trim();
-    //adding feelings from text to array
-    topics.push(topic);
-    console.log(topics)
+    $("#find-feelings").on("click", function(event){
+        event.preventDefault();
+        //grabs input from textbox
+        var topic = $("#feelings-input").val().trim();
+        //adding feelings from text to array
+        topics.push(topic);
+        console.log(topics)
 
-    renderButtons();
+        renderButtons();
 }); 
 
 function clear(){
 
-var clear = $("<button>");
-    clear.text("CLEAR GIFS");
-    clear.addClass("clearBtn");
-    clear.attr("data-name", "clear")
-    $("#feelings-form").append(clear);
-    
-    clear.on("click", function(){
-        $("#gifs").empty(); 
+    var clear = $("<button>");
+        clear.text("CLEAR GIFS");
+        clear.addClass("clearBtn");
+        clear.attr("data-name", "clear")
+        $("#feelings-form").append(clear);
+        
+        clear.on("click", function(){
+            $("#gifs").empty(); 
     });
 }
 
