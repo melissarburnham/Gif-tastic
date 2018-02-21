@@ -1,8 +1,15 @@
 body {
     background-color: rgb(106, 149, 214); 
+}
+
+h1, 
+#feelings-form, 
+#buttons,
+#find-feelings {
     text-align: center;
 }
 
-.gifRating{
-    width: 33%;
+.gifRating {
+    width: 40px;
+    border: solid black 5px;
 }
