@@ -1,4 +1,6 @@
 //variables
+$(document).ready(function(){
+
 
 var topics = ["happy", "sad", "angry", "tired", "confused", "annoyed", "excited", "laughing", "crying", "ashamed", "ecstatic", "love", "hungry"]
 
@@ -22,7 +24,10 @@ function displayGifs(){
 
             for (var i = 0; i < response.data.length; i++) { 
                 var gifImg = $("<img>");
-                gifImg.attr("src", response.data[i].images.fixed_height_still.url); 
+                gifImg.attr("src", response.data[i].images.fixed_height_still.url);
+                gifImg.attr("data-still", response.data[i].images.fixed_height_still.url); 
+                gifImg.attr("data-animate", response.data[i].images.fixed_height.url); 
+                gifImg.attr("data-state", "still");
                 gifImg.addClass("gifImg");
                $("#gifs").append(gifImg); 
 
@@ -32,8 +37,21 @@ function displayGifs(){
                $(".gifImg").append(gifRating);
             }
             function clickPicture(){
-                $(".gifImg").on("click", function(){
-                    $(".gifImg").push(response.data[i].images.fixed_height.url);   
+                $(document).on("click", ".gifImg", function(){
+                    var picVal = $(this).attr("data-state");
+                    console.log(picVal);
+                    if(picVal === "still"){
+                        var gifAnimate = $(this).attr("data-animate");
+                        $(this).attr("src", gifAnimate);
+                        $(this).attr("data-state", "animate");
+                        console.log(gifAnimate);
+                        console.log(picVal);
+                    } else {
+                        var gifStill = $(this).attr("data-still");
+                        $(this).attr("src", gifStill);
+                        $(this).attr("data-state", "still");
+
+                    }
                 });
             }
             clickPicture();
@@ -84,6 +102,7 @@ $(document).on("click", ".button", displayGifs);
 renderButtons();
 clear();
 
+});
 
 //when user clicks buttom
     //clear div
