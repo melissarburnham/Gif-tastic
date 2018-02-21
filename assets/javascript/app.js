@@ -1,4 +1,3 @@
-//variables
 $(document).ready(function(){
 
 
@@ -13,7 +12,7 @@ function displayGifs(){
     var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=o4AWaJdZms9c7YCrvCHRCURV3GC5eSCj&q=" + topic + "&limit=10&offset=0&rating=G&lang=en"
 
     $("#gifs").empty(); 
-
+    
     $.ajax({
         url: queryURL,
         method: "GET"
@@ -34,29 +33,27 @@ function displayGifs(){
                gifRating.addClass("gifRating");
                $("#gifs").append(gifRating);
             }
-            function clickPicture(){
-                $(document).on("click", ".gifImg", function(){
-                    var picVal = $(this).attr("data-state");
-                    console.log(picVal);
-                    if(picVal === "still"){
-                        var gifAnimate = $(this).attr("data-animate");
-                        $(this).attr("src", gifAnimate);
-                        $(this).attr("data-state", "animate");
-                        console.log(gifAnimate);
-                        console.log(picVal);
-                    } else {
-                        var gifStill = $(this).attr("data-still");
-                        $(this).attr("src", gifStill);
-                        $(this).attr("data-state", "still");
-
-                    }
-                });
-            }
-            clickPicture();
+            
       });
 }
 
-
+function clickPicture(){
+    $(document).on("click", ".gifImg", function(){
+        var picVal = $(this).attr("data-state");
+        console.log(picVal);
+        if(picVal === "still"){
+            var gifAnimate = $(this).attr("data-animate");
+            $(this).attr("src", gifAnimate);
+            $(this).attr("data-state", "animate");
+            console.log(gifAnimate);
+            console.log(picVal);
+        } else {
+            var gifStill = $(this).attr("data-still");
+            $(this).attr("src", gifStill);
+            $(this).attr("data-state", "still");
+        }
+    });
+}
 
 function renderButtons(){
 
@@ -91,14 +88,17 @@ function clear(){
         $("#feelings-form").append(clear);
         
         clear.on("click", function(){
+            event.preventDefault();
             $("#gifs").empty(); 
     });
 }
 
 $(document).on("click", ".button", displayGifs);
 
-renderButtons();
 clear();
+renderButtons();
+clickPicture();
+
 
 });
 
