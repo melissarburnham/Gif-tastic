@@ -1,5 +1,5 @@
 body {
-    background-color: rgb(38, 42, 95);
+    background-color:black;
     text-align: center;
 }
 
@@ -70,7 +70,7 @@ label,
 
 #left, #right {
     position: fixed;
-    width: 10%;
+    width: 15%;
     height: 100%;
     top: 0
 }
