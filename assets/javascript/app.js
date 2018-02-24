@@ -1,11 +1,7 @@
 $(document).ready(function(){
 
 
-var topics = ["happy", "sad", "angry", "tired", "confused", "annoyed", "excited", "laughing", "crying", "ashamed", "ecstatic", "love", "hungry"]
-
-var apiKey = "o4AWaJdZms9c7YCrvCHRCURV3GC5eSCj";
-
-var gifs = [];
+var topics = ["sad", "angry", "tired", "confused", "annoyed", "excited", "laughing", "crying", "ashamed", "ecstatic", "love", "hungry"]
 
 function displayGifs(){
     var topic = $(this).attr("data-name");
@@ -18,7 +14,7 @@ function displayGifs(){
         method: "GET"
       }).then(function(response) {
             console.log(response);
-          
+          //loop through API and append image to gifs div 
             for (var i = 0; i < response.data.length; i++) { 
                 var gifImg = $("<img>");
                 gifImg.attr("src", response.data[i].images.fixed_height_still.url);
@@ -26,21 +22,22 @@ function displayGifs(){
                 gifImg.attr("data-animate", response.data[i].images.fixed_height.url); 
                 gifImg.attr("data-state", "still");
                 gifImg.addClass("gifImg");
+                gifImg.addClass("img-responsive");
                $("#gifs").append(gifImg); 
-
-               var gifRating = $("<text>");
-               gifRating.text("Rating: " + response.data[i].rating.toUpperCase());
+                //add rating from API to gifs div
+               var gifRating = $("<div>");
+               gifRating.html("Rating: " + response.data[i].rating.toUpperCase());
                gifRating.addClass("gifRating");
-               $("#gifs").append(gifRating);
+               gifRating.appendTo("#gifs");
             }
-            
-      });
+      }); 
 }
-
+//when you click the image
 function clickPicture(){
     $(document).on("click", ".gifImg", function(){
         var picVal = $(this).attr("data-state");
         console.log(picVal);
+        //if image is still, replace with animated, else replace with still 
         if(picVal === "still"){
             var gifAnimate = $(this).attr("data-animate");
             $(this).attr("src", gifAnimate);
@@ -54,7 +51,7 @@ function clickPicture(){
         }
     });
 }
-
+//create feelings button and append to buttons div
 function renderButtons(){
 
     $("#buttons").empty();
@@ -67,45 +64,55 @@ function renderButtons(){
         $("#buttons").append(button);
     }
 }
-
+//when user searches for a feeling...
     $("#find-feelings").on("click", function(event){
         event.preventDefault();
         //grabs input from textbox
         var topic = $("#feelings-input").val().trim();
-        //adding feelings from text to array
+        //if input is blank, do nothing. otherwise, push input to array
+        if(!topic){
+            return;
+      } else {
         topics.push(topic);
         console.log(topics)
+      }
 
         renderButtons();
 }); 
+//clears only the gifs
+function clearGifs(){
 
-function clear(){
-
-    var clear = $("<button>");
-        clear.text("CLEAR GIFS");
-        clear.addClass("clearBtn");
-        clear.attr("data-name", "clear")
-        $("#feelings-form").append(clear);
+    var clearGifs = $("<button>");
+        clearGifs.text("CLEAR GIFS");
+        clearGifs.addClass("clearBtn");
+        clearGifs.attr("data-name", "clearGifs")
+        $("#feelings-form").append(clearGifs);
         
-        clear.on("click", function(){
+        clearGifs.on("click", function(){
             event.preventDefault();
             $("#gifs").empty(); 
     });
 }
+//clears gifs and buttons
+function clearAll(){
 
+    var clearAll = $("<button>");
+        clearAll.text("CLEAR ALL");
+        clearAll.addClass("clearBtn");
+        clearAll.attr("data-name", "clearAll")
+        $("#feelings-form").append(clearAll);
+        
+        clearAll.on("click", function(){
+            $("#gifs").empty(); 
+    });
+}
+//call to all functions
 $(document).on("click", ".button", displayGifs);
 
-clear();
+clearGifs();
+clearAll();
 renderButtons();
 clickPicture();
 
 
 });
-
-//when user clicks buttom
-    //clear div
-    //display 10 images about that topic
-//when user searches, create button
-    //clear div 
-    //display 10 images about that topic
-//create clear button function
