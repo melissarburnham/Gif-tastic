@@ -16,6 +16,10 @@ function displayGifs(){
             console.log(response);
           //loop through API and append image to gifs div 
             for (var i = 0; i < response.data.length; i++) { 
+                var gifDisplay = $("<div>");
+                gifDisplay.addClass("gifDisplay");
+                gifDisplay.appendTo("#gifs");
+
                 var gifImg = $("<img>");
                 gifImg.attr("src", response.data[i].images.fixed_height_still.url);
                 gifImg.attr("data-still", response.data[i].images.fixed_height_still.url); 
@@ -23,12 +27,13 @@ function displayGifs(){
                 gifImg.attr("data-state", "still");
                 gifImg.addClass("gifImg");
                 gifImg.addClass("img-responsive");
-               $("#gifs").append(gifImg); 
+                gifDisplay.append(gifImg); 
+               
                 //add rating from API to gifs div
                var gifRating = $("<div>");
                gifRating.html("Rating: " + response.data[i].rating.toUpperCase());
                gifRating.addClass("gifRating");
-               gifRating.appendTo("#gifs");
+               gifRating.appendTo(gifDisplay);
             }
       }); 
 }

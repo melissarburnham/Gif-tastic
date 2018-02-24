@@ -27,8 +27,23 @@ h1{
     right: 0;
 }
 
+.gifImg {
+    height: 300px;
+}
+
 .gifRating{
     font-size: 20px;
+}
+
+#gifs {
+     display: flex;   
+     flex-wrap: wrap;
+    width: 66%;
+    justify-content: center; 
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
 }
 
 .button, 
@@ -70,7 +85,7 @@ label,
 
 #left, #right {
     position: fixed;
-    width: 15%;
+    width: 17%;
     height: 100%;
     top: 0
 }
