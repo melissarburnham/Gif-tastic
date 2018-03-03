@@ -3,12 +3,6 @@ body {
     text-align: center;
 }
 
-/* h1, 
-#feelings-form, 
-#buttons,
-#find-feelings {
-    text-align: center;
-} */
 body{
     font-family: 'Mountains of Christmas', cursive;
 }
@@ -37,8 +31,8 @@ h1{
 }
 
 #gifs {
-     display: flex;   
-     flex-wrap: wrap;
+    display: flex;   
+    flex-wrap: wrap;
     width: 66%;
     justify-content: center; 
     margin-left: auto;
